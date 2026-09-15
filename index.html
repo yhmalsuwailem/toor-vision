@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Toor Vision · كل غرض يدخل محلّك، له رحلة موثّقة</title>
+<meta name="description" content="Toor Vision يمنح كاميرات محلك ذاكرة: كل غرض يدخل، يُتابع حتى يخرج، ويُسجَّل من استلمه ومتى سُلّم." />
+<meta property="og:title" content="Toor Vision · كل غرض يدخل محلّك، له رحلة موثّقة" />
+<meta property="og:description" content="يتابع كل غرض من لحظة استلامه حتى خروجه، ويعطيك سجلًا واضحًا للمراجعة." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="./assets/logo/favicon-toor.svg" />
+<style>
+@font-face{font-family:"Thmanyah Sans";src:url("./assets/fonts/thmanyah-sans-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("./assets/fonts/thmanyah-sans-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("./assets/fonts/thmanyah-sans-Bold.woff2") format("woff2");font-weight:600 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("./assets/fonts/thmanyah-sans-Black.woff2") format("woff2");font-weight:800 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Thmanyah Serif Display";src:url("./assets/fonts/thmanyah-serif-display-Bold.woff2") format("woff2");font-weight:600 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Thmanyah Serif Display";src:url("./assets/fonts/thmanyah-serif-display-Black.woff2") format("woff2");font-weight:800 900;font-style:normal;font-display:swap}:root{
+  --bg:#05060a;
+  --ink:#f4f6fb;
+  --muted:rgba(244,246,251,.60);
+  --faint:rgba(244,246,251,.34);
+  --line:rgba(244,246,251,.10);
+  --line2:rgba(244,246,251,.06);
+  --ac:#493bf9;
+  --ac2:#7a6bff;
+  --ac-soft:rgba(73,59,249,.16);
+  --warn:#ffc247;
+  --ok:#5ce1b9;
+  --serif:"Thmanyahserifdisplay","Thmanyah Serif Display",serif;
+  --sans:"Thmanyahsans","Thmanyah Sans",system-ui,sans-serif;
+  --pad:clamp(20px,4vw,64px);
+  --max:1280px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:400;line-height:1.85;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:800;line-height:1.22;letter-spacing:-.02em;margin:0}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.sec{padding:clamp(84px,11vw,170px) 0;position:relative}
+.statement{font-size:clamp(30px,4.6vw,60px);letter-spacing:-.03em}
+.lead{font-size:clamp(16px,1.5vw,20px);color:var(--muted);max-width:60ch;margin-top:20px}
+.kline{width:44px;height:2px;background:linear-gradient(90deg,var(--ac),transparent);margin-bottom:26px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:500;
+  font-size:15px;padding:15px 28px;border-radius:999px;border:1px solid var(--line);
+  background:transparent;color:var(--ink);cursor:pointer;transition:.35s cubic-bezier(.22,.61,.36,1)}
+.btn:hover{transform:translateY(-2px);border-color:rgba(244,246,251,.26)}
+.btn-p{background:linear-gradient(120deg,var(--ac),#6a4dff);border-color:transparent;color:#fff;
+  box-shadow:0 18px 46px -18px rgba(73,59,249,.75)}
+.btn-p:hover{box-shadow:0 24px 60px -18px rgba(73,59,249,.95)}
+.btn-g{background:rgba(244,246,251,.05);backdrop-filter:blur(8px)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.rv.on{opacity:1;transform:none}
+
+/* nav */
+.top{position:fixed;inset:0 0 auto 0;z-index:60;transition:.4s}
+.top::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,10,.86),rgba(5,6,10,0));opacity:0;transition:.4s;pointer-events:none}
+.top.on::after{opacity:1}
+.topin{display:flex;align-items:center;gap:clamp(14px,2.4vw,40px);height:76px;position:relative;z-index:2}
+.logo{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.logo img{height:32px;width:auto}
+.logo .lw{display:flex;flex-direction:column;line-height:1}
+.logo .lw b{font-family:var(--sans);font-weight:600;font-size:15.5px;letter-spacing:.20em}
+.logo .lw small{font-size:11.5px;color:rgba(244,246,251,.52);letter-spacing:.06em;margin-top:5px}
+.mn{display:flex;align-items:center;gap:clamp(12px,1.7vw,26px);margin-inline-start:auto;font-size:14.5px;color:var(--muted)}
+.mn a{position:relative;padding:6px 2px;transition:.3s}
+.mn a::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:var(--ink);transform:scaleX(0);transition:.35s;transform-origin:right}
+.mn a:hover{color:var(--ink)}
+.mn a:hover::after{transform:scaleX(1)}
+#prog{position:fixed;top:0;right:0;height:2px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:80}
+@media(max-width:1000px){.mn{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:clamp(48px,7vw,96px)}
+.hero-art{position:absolute;inset:-8% 0 0 0;height:118%;background:url("./assets/art/cine-hero.jpg") center/cover no-repeat;will-change:transform}
+.hero-art::after{content:"";position:absolute;inset:0;
+  background:
+   radial-gradient(120% 80% at 50% 12%,rgba(73,59,249,.20),transparent 62%),
+   linear-gradient(180deg,rgba(5,6,10,.62) 0%,rgba(5,6,10,.35) 42%,rgba(5,6,10,.92) 88%,var(--bg) 100%)}
+.hero-in{position:relative;z-index:2;width:100%}
+.hero h1{font-size:clamp(38px,6.6vw,96px);letter-spacing:-.035em;max-width:17ch}
+.hero .sub{margin-top:26px;font-size:clamp(16px,1.6vw,21px);color:rgba(244,246,251,.78);max-width:56ch;line-height:2}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,44px);margin-top:clamp(40px,5vw,70px);
+  padding-top:26px;border-top:1px solid var(--line2);color:var(--muted);font-size:14.5px}
+.hero-facts span{display:flex;align-items:center;gap:10px}
+.hero-facts i{width:6px;height:6px;border-radius:50%;background:var(--ac2);box-shadow:0 0 12px var(--ac2);flex:0 0 auto}
+.hero-scroll{position:absolute;inset:auto auto 22px 50%;transform:translateX(-50%);z-index:2;width:1px;height:56px;
+  background:linear-gradient(180deg,transparent,rgba(244,246,251,.5));opacity:.7}
+.hero-scroll::after{content:"";position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:#fff;animation:drop 2.4s infinite}
+@keyframes drop{0%{top:0;opacity:0}18%{opacity:1}100%{top:52px;opacity:0}}
+
+/* journey: full-bleed cinematic media blocks */
+.jr{position:relative;height:min(92svh,880px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.jr+.jr{margin-top:clamp(10px,2vw,26px)}
+.jr-in{position:absolute;inset:0;overflow:hidden}
+.jr-in img,.jr-in video{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform;transition:transform 1.6s cubic-bezier(.22,.61,.36,1)}
+.jr.on .jr-in img,.jr.on .jr-in video{transform:scale(1)}
+.jr-veil{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(5,6,10,.55),rgba(5,6,10,.18) 34%,rgba(5,6,10,.86) 78%,var(--bg) 100%),
+  radial-gradient(90% 70% at 80% 30%,rgba(73,59,249,.14),transparent 60%)}
+.jr-cap{position:relative;z-index:2;padding-bottom:clamp(34px,5vw,74px)}
+.jr-cap h2{font-size:clamp(26px,3.5vw,46px);max-width:22ch;letter-spacing:-.03em}
+.jr-cap p{margin-top:16px;color:rgba(244,246,251,.74);max-width:54ch;font-size:clamp(15px,1.4vw,18px)}
+.jr-num{color:var(--ac2);font-weight:600;font-size:13px;letter-spacing:.3em;margin-bottom:18px}
+/* output slideshow */
+#output .stage{position:relative;margin-top:clamp(34px,4vw,60px);border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);background:#0a0b12;box-shadow:0 60px 140px -60px rgba(73,59,249,.55)}
+#output .stage-in{position:relative;aspect-ratio:16/9}
+#output .stage-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;
+  opacity:0;transform:scale(1.03);transition:opacity 1.1s ease,transform 1.6s cubic-bezier(.22,.61,.36,1)}
+#output .stage-in img.on{opacity:1;transform:none}
+#output .dots{display:flex;gap:9px;margin-top:22px}
+#output .dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(244,246,251,.22);transition:.35s}
+#output .dots button.on{background:var(--ac2);box-shadow:0 0 14px var(--ac2);width:26px;border-radius:99px}
+#output .cap{margin-top:20px;font-size:clamp(15px,1.5vw,19px);color:rgba(244,246,251,.76);max-width:64ch;min-height:3.4em}
+#output .stageglow{position:absolute;inset:auto 0 -40% 0;height:80%;background:radial-gradient(60% 100% at 50% 0,rgba(73,59,249,.20),transparent 70%);pointer-events:none}
+
+/* cases */
+.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2vw,26px);margin-top:clamp(34px,4vw,58px)}
+.case{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0b12;
+  transition:.5s cubic-bezier(.22,.61,.36,1)}
+.case:hover{transform:translateY(-5px);border-color:rgba(73,59,249,.45);box-shadow:0 40px 90px -50px rgba(73,59,249,.9)}
+.case.wide{grid-column:1/-1}
+.case img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.case.wide img{aspect-ratio:21/9}
+.case .cb{padding:24px 26px 28px}
+.case h3{font-size:clamp(19px,1.8vw,24px)}
+.case p{margin-top:10px;color:var(--muted);font-size:15.5px;max-width:56ch}
+.case .go{margin-top:16px;display:inline-flex;align-items:center;gap:9px;color:var(--ac2);font-size:14.5px;cursor:pointer}
+.case .go:hover{color:#fff}
+
+/* sectors */
+.sec-grid2{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);margin-top:clamp(30px,4vw,54px)}
+.sct{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line2)}
+.sct img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.4s cubic-bezier(.22,.61,.36,1)}
+.sct:hover img{transform:scale(1.05)}
+.sct .nm{position:absolute;inset:auto 0 0 0;padding:18px 20px;font-family:var(--serif);font-weight:700;
+  font-size:clamp(17px,1.6vw,21px);background:linear-gradient(180deg,transparent,rgba(5,6,10,.92))}
+
+/* compare */
+.cmp{margin-top:clamp(30px,4vw,54px)}
+.cmp-stage{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0b12;user-select:none}
+.cmp-stage img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.cmp-top{position:absolute;inset:0;overflow:hidden;will-change:clip-path}
+.cmp-top img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp-bar{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.92);box-shadow:0 0 22px rgba(73,59,249,.9);pointer-events:none}
+.cmp-bar::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
+  background:rgba(9,10,18,.72);border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(6px)}
+.cmp-bar::before{content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;font-size:17px;color:#fff}
+.cmp input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cmp-tabs{display:flex;gap:20px;margin-top:18px;color:var(--muted);font-size:15px}
+.cmp-tabs button{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;border-bottom:1px solid transparent;transition:.3s}
+.cmp-tabs button.on{color:#fff;border-color:var(--ac2)}
+
+/* why */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,54px);margin-top:clamp(30px,4vw,54px)}
+.why-c{padding:clamp(24px,2.6vw,38px);border-radius:18px;border:1px solid var(--line2);background:rgba(244,246,251,.02)}
+.why-c.hi{border-color:rgba(73,59,249,.42);background:linear-gradient(180deg,rgba(73,59,249,.10),rgba(244,246,251,.02))}
+.why-c h3{font-size:clamp(20px,2vw,26px);margin-bottom:14px}
+.why-c h3.mut{color:var(--muted);font-weight:700}
+.why-c p{color:rgba(244,246,251,.72);font-size:16px}
+.why-c p+p{margin-top:14px}
+@media(max-width:900px){.case-grid{grid-template-columns:1fr}.sec-grid2{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.sec-grid2{grid-template-columns:1fr}}
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(32px,4vw,56px)}
+.plan{position:relative;border-radius:20px;border:1px solid var(--line);background:rgba(244,246,251,.02);
+  padding:clamp(26px,2.8vw,38px);display:flex;flex-direction:column;transition:.5s cubic-bezier(.22,.61,.36,1)}
+.plan:hover{transform:translateY(-5px);border-color:rgba(73,59,249,.4)}
+.plan.hi{background:linear-gradient(180deg,rgba(73,59,249,.14),rgba(244,246,251,.02));border-color:rgba(73,59,249,.5);
+  box-shadow:0 50px 120px -60px rgba(73,59,249,.95)}
+.plan h3{font-size:clamp(21px,2vw,27px)}
+.plan .pr{margin:14px 0 4px;font-family:var(--serif);font-weight:800;font-size:clamp(22px,2.2vw,30px);color:#fff}
+.plan .pr small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--faint);margin-inline-start:8px}
+.plan ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.plan li{display:flex;gap:12px;color:rgba(244,246,251,.76);font-size:15.5px;line-height:1.8}
+.plan li i{width:6px;height:6px;border-radius:50%;background:var(--ac2);margin-top:12px;flex:0 0 auto}
+.plan .btn{margin-top:26px;justify-content:center}
+
+/* faq */
+.faq{margin-top:clamp(30px,4vw,54px);border-top:1px solid var(--line2)}
+.faq details{border-bottom:1px solid var(--line2);padding:6px 0}
+.faq summary{list-style:none;cursor:pointer;padding:24px 0;display:flex;align-items:center;gap:18px;
+  font-family:var(--serif);font-weight:700;font-size:clamp(17px,1.7vw,22px);transition:.3s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-inline-start:auto;color:var(--ac2);font-size:22px;font-family:var(--sans);transition:.35s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover{color:#fff}
+.faq .a{padding:0 0 26px;color:var(--muted);font-size:16px;max-width:78ch}
+
+/* book */
+#book{position:relative;overflow:hidden}
+#book::before{content:"";position:absolute;inset:-30% -10% auto -10%;height:120%;
+  background:radial-gradient(60% 60% at 50% 30%,rgba(73,59,249,.22),transparent 68%);pointer-events:none}
+.book-in{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center}
+.book-in h2{font-size:clamp(30px,4.4vw,58px);max-width:24ch;letter-spacing:-.03em}
+.book-in p{margin-top:20px;color:var(--muted);max-width:62ch;font-size:clamp(15px,1.5vw,18px)}
+.book-in .btn{margin-top:34px}
+.book-notes{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2.4vw,42px);margin-top:clamp(34px,4vw,58px);
+  padding-top:28px;border-top:1px solid var(--line2);color:var(--muted);font-size:14.5px;max-width:900px}
+.book-notes span{display:flex;align-items:center;gap:10px}
+.book-notes i{width:6px;height:6px;border-radius:50%;background:var(--ac2);flex:0 0 auto}
+
+/* footer */
+footer{border-top:1px solid var(--line2);padding:clamp(36px,4vw,64px) 0 clamp(30px,3vw,48px)}
+.ft-in{display:flex;flex-wrap:wrap;align-items:center;gap:20px}
+.ft-in img{height:46px}
+.ft-in .fw{font-size:13.5px;color:var(--faint);letter-spacing:.14em}
+.ft-in .fr{margin-inline-start:auto;color:var(--faint);font-size:13.5px}
+
+/* zone demo */
+.dz-launch{position:fixed;top:92px;left:22px;z-index:70;display:inline-flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:999px;border:1px solid rgba(73,59,249,.5);cursor:pointer;
+  background:rgba(9,10,18,.72);backdrop-filter:blur(12px);color:#fff;font-family:var(--sans);font-weight:500;font-size:14px;
+  box-shadow:0 20px 50px -24px rgba(73,59,249,.95);transition:.35s}
+.dz-launch:hover{transform:translateY(-2px);border-color:rgba(122,107,255,.9)}
+.dz-launch i{width:7px;height:7px;border-radius:50%;background:var(--ac2);box-shadow:0 0 12px var(--ac2)}
+@media(max-width:700px){.dz-launch{top:auto;bottom:22px;left:22px}}
+.dz{position:fixed;inset:0;z-index:120;display:none}
+.dz.on{display:block}
+.dz-veil{position:absolute;inset:0;background:rgba(3,4,8,.78);backdrop-filter:blur(10px)}
+.dz-panel{position:absolute;inset:clamp(10px,3vh,40px) clamp(10px,3vw,60px);border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);background:#07080e;display:flex;flex-direction:column;
+  box-shadow:0 80px 200px -60px rgba(0,0,0,.9)}
+.dz-head{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line2)}
+.dz-head b{font-family:var(--serif);font-weight:800;font-size:17px}
+.dz-head .sp{margin-inline-start:auto}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--faint);display:inline-block;flex:0 0 auto}
+.dot.live{background:var(--ac2);box-shadow:0 0 12px var(--ac2)}
+.dz-x{background:none;border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px;transition:.3s}
+.dz-x:hover{border-color:rgba(244,246,251,.4);background:rgba(244,246,251,.06)}
+.dz-body{display:grid;grid-template-columns:1.45fr .95fr;gap:20px;padding:20px;overflow:auto;min-height:0}
+.dz-stage{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0a0b12;align-self:start}
+.dz-stage img{width:100%;display:block}
+.dz-stage svg{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.dz-side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.dz-scenes{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+.dz-scenes button{padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(244,246,251,.03);
+  color:var(--muted);font:inherit;font-size:14px;cursor:pointer;transition:.3s}
+.dz-scenes button:hover{color:#fff;border-color:rgba(244,246,251,.28)}
+.dz-scenes button.on{color:#fff;border-color:rgba(73,59,249,.85);background:rgba(73,59,249,.16)}
+.dz-mode{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dz-mode button{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(244,246,251,.03);color:var(--muted);font:inherit;font-size:14.5px;cursor:pointer;transition:.3s}
+.dz-mode button.on{color:#fff;border-color:rgba(244,246,251,.4);background:rgba(244,246,251,.07)}
+.dz-mode i{width:10px;height:10px;border-radius:3px;display:inline-block;flex:0 0 auto}
+.dz-mode i.cust{background:#4fa3ff}
+.dz-mode i.staff{background:#ffc247}
+.dz-acts{display:grid;grid-template-columns:1fr;gap:10px}
+.dz-acts .btn{padding:13px 18px;justify-content:center;font-size:14.5px}
+.btn.bp{background:linear-gradient(120deg,var(--ac),#6a4dff);border-color:transparent;color:#fff;
+  box-shadow:0 16px 40px -20px rgba(73,59,249,.9)}
+.btn.bg2{background:rgba(244,246,251,.04)}
+.dz-hint{color:var(--muted);font-size:14.5px;line-height:1.9}
+.dz-hint b{color:#fff;font-weight:500}
+.dz-verdict{margin-top:auto;border-top:1px solid var(--line2);padding-top:18px;display:grid;gap:12px}
+.dz-verdict .row{display:flex;align-items:baseline;gap:12px}
+.dz-verdict .num{font-family:var(--serif);font-weight:900;font-size:30px;line-height:1;color:#fff;min-width:34px}
+.dz-verdict .row b{font-weight:500;color:var(--muted);font-size:15px}
+.dz-verdict .st{display:inline-flex;align-items:center;gap:10px;font-size:15.5px;color:#fff;
+  padding:12px 16px;border-radius:12px;background:rgba(244,246,251,.04);border:1px solid var(--line2)}
+.dz-verdict .st.warn{background:rgba(245,181,68,.10);border-color:rgba(245,181,68,.35)}
+
+@media(max-width:1000px){
+  .plans{grid-template-columns:1fr}
+  .dz-panel{inset:0;border-radius:0}
+  .dz-body{grid-template-columns:1fr}
+  .dz-verdict .num{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
+</head>
+<body>
+<div id="prog" aria-hidden="true"></div>
+
+<header class="top" id="top">
+  <div class="wrap topin">
+    <a class="logo" href="#top" aria-label="Toor Vision">
+      <img src="./assets/logo/logo-toor-compact.svg" alt="طور" />
+      <span class="lw"><b>TOOR VISION</b><small>رحلة الغرض داخل محلك</small></span>
+    </a>
+    <nav class="mn">
+      <a href="#journey">كيف يشتغل</a>
+      <a href="#output">اللوحة</a>
+      <a href="#cases">الحالات</a>
+      <a href="#sectors">القطاعات</a>
+      <a href="#tiers">الباقات</a>
+      <a href="#faq">الأسئلة</a>
+    </nav>
+    <a class="btn btn-p" style="padding:12px 22px;font-size:14px" href="mailto:yhmalsuwailem@gmail.com?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20Toor%20Vision&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%B9%D8%B1%D8%B6%20%D9%84%D9%80%20Toor%20Vision%20%D8%B9%D9%84%D9%89%20%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%20%D9%85%D8%AD%D9%84%D9%8A.%0A%0A%D8%A7%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%3A%0A%D9%86%D9%82%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%84%D9%8A%D9%85%20(%D8%A7%D8%B3%D8%AA%D9%82%D8%A8%D8%A7%D9%84%20%2F%20%D9%83%D8%A7%D8%B4%D9%8A%D8%B1%20%2F%20%D9%85%D8%AD%D8%B7%D8%A9%20%D8%B5%D9%8A%D8%A7%D9%86%D8%A9)%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">احجز عرضًا</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top-hero">
+  <div class="hero-art" id="heroArt" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <h1 class="rv">كل غرض يدخل محلّك، له رحلة موثّقة.</h1>
+    <p class="sub rv">Toor Vision يمنح كاميرات محلك ذاكرة. يتابع كل غرض من لحظة استلامه حتى خروجه، ويحفظ ما حدث: متى وصل، كم بقي، ومن كان مسؤولًا في تلك اللحظة.</p>
+    <div class="hero-cta rv">
+      <a class="btn btn-p" href="mailto:yhmalsuwailem@gmail.com?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20Toor%20Vision&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%B9%D8%B1%D8%B6%20%D9%84%D9%80%20Toor%20Vision.%0A%0A%D8%A7%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">احجز عرضًا على محلّك</a>
+      <button class="btn btn-g" data-open-demo>جرّب رسم المناطق على مشهد حقيقي</button>
+    </div>
+    <div class="hero-facts rv">
+      <span><i></i>يشتغل على الكاميرات الموجودة عندك</span>
+      <span><i></i>يخبرك بالمهلة قبل أن تصل الشكوى</span>
+      <span><i></i>سجل جاهز للمراجعة في أي وقت</span>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"></div>
+</section>
+
+<section id="journey">
+  <article class="jr rv">
+    <div class="jr-in">
+      <video src="./assets/clip-verify.mp4" poster="./assets/verify-poster.jpg" muted loop playsinline preload="metadata"></video>
+    </div>
+    <div class="jr-veil" aria-hidden="true"></div>
+    <div class="wrap jr-cap">
+      <h2>اللحظة التي يستلم فيها موظفك، تُكتب في السجل.</h2>
+      <p>الغرض يدخل، والكاميرا ترى من حمله وإلى أين وصل. عند أي مراجعة لاحقًا، تعرف بالضبط كيف بدأت القصة.</p>
+    </div>
+  </article>
+
+  <article class="jr rv">
+    <div class="jr-in">
+      <video src="./assets/clip-cycle.mp4" poster="./assets/cycle-poster.jpg" muted loop playsinline preload="metadata"></video>
+    </div>
+    <div class="jr-veil" aria-hidden="true"></div>
+    <div class="wrap jr-cap">
+      <h2>وعند التسليم، تُغلق الرحلة.</h2>
+      <p>تسجّل اللوحة متى خرج الغرض، وكم بقي في محلك، ومن سلّمه. بلا أوراق وبلا تخمين.</p>
+    </div>
+  </article>
+
+  <article class="jr rv">
+    <div class="jr-in">
+      <img src="./assets/case-queue.jpg" alt="انتظار عند المحطة" loading="lazy" />
+    </div>
+    <div class="jr-veil" aria-hidden="true"></div>
+    <div class="wrap jr-cap">
+      <h2>وقبل أن يتذمّر عميل، أنت تعرف.</h2>
+      <p>ثلاثة واقفين عند المحطة ولا أحد يخدمهم. يوصلك التنبيه في اللحظة نفسها، لا في نهاية اليوم.</p>
+    </div>
+  </article>
+</section>
+<section class="sec" id="output">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">لوحة واحدة تحكي يوم محلّك من أوله.</h2>
+    <p class="lead rv">كل حدث له سطر: الغرض، واللحظة، والمسؤول. تتفرّج على اليوم كاملًا بعينين مرتاحتين.</p>
+    <div class="stage rv">
+      <div class="stage-in" id="shotStage">
+        <img class="on" src="./assets/shot-overview.jpg" alt="النظرة العامة" />
+        <img src="./assets/shot-zones.jpg" alt="الكاميرات والمناطق" loading="lazy" />
+        <img src="./assets/shot-builder.jpg" alt="باني الحالات" loading="lazy" />
+        <img src="./assets/shot-lab.jpg" alt="الاختبار على مقاطع حقيقية" loading="lazy" />
+        <img src="./assets/shot-lab-decisions.jpg" alt="سجل القرارات" loading="lazy" />
+        <img src="./assets/shot-events.jpg" alt="الأحداث" loading="lazy" />
+        <img src="./assets/shot-reports.jpg" alt="التقارير" loading="lazy" />
+      </div>
+      <div class="stageglow" aria-hidden="true"></div>
+    </div>
+    <div class="dots" id="shotDots" role="tablist" aria-label="شاشات النظام"></div>
+    <p class="cap" id="shotCap">كل كاميرات محلك في شاشة واحدة: حالة كل منطقة، وعدد المنتظرين الآن، والأحداث التي تحتاج قرارًا.</p>
+  </div>
+</section>
+
+<section class="sec" id="cases">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">خمس حالات تلمس أثرها من أول أسبوع.</h2>
+    <p class="lead rv">كل حالة هنا مرصودة فعلًا على مشاهد حقيقية، وليست رسمًا توضيحيًا.</p>
+    <div class="case-grid">
+      <article class="case wide rv">
+        <img src="./assets/case-wait.jpg" alt="غرض مستلم دون تسليم" loading="lazy" />
+        <div class="cb">
+          <h3>غرض مستلم دون تسليم</h3>
+          <p>استُلم غرض وبقي في المحل أكثر من المهلة المتفق عليها، فوصل التنبيه وأنت تعرف عند من توقّف.</p>
+        </div>
+      </article>
+      <article class="case rv">
+        <img src="./assets/case-queue.jpg" alt="عميل ينتظر دون تغطية" loading="lazy" />
+        <div class="cb">
+          <h3>عميل ينتظر دون تغطية</h3>
+          <p>ثلاثة واقفين عند المحطة ولا موظف يساعدهم. تُنبَّه قبل أن يتحول الانتظار إلى شكوى.</p>
+        </div>
+      </article>
+      <article class="case rv">
+        <img src="./assets/pair-repair-boxes.jpg" alt="مدة بقاء الغرض على المحطة" loading="lazy" />
+        <div class="cb">
+          <h3>مدة بقاء الغرض على المحطة</h3>
+          <p>تعرف متوسط ما يقضيه الغرض قبل التسليم، ومن أي محطة يتأخر أكثر من غيرها.</p>
+        </div>
+      </article>
+      <article class="case rv">
+        <img src="./assets/sector-warehouse.jpg" alt="تغطية نقطة الشحن" loading="lazy" />
+        <div class="cb">
+          <h3>نقطة شحن بلا مراقبة</h3>
+          <p>طرد يقف عند نقطة الشحن دون من يتابعه، فيظهر السطر فورًا في اللوحة.</p>
+        </div>
+      </article>
+      <article class="case rv">
+        <img src="./assets/sector-restaurant.jpg" alt="طابور يتشكّل مبكرًا" loading="lazy" />
+        <div class="cb">
+          <h3>طابور يتشكّل مبكرًا</h3>
+          <p>الصف يبدأ قبل أن تشعر به. تتصرّف معه في وقته بدل أن تعالجه بعد الذروة.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sectors">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">نفس الفكرة، لكل قطاع يحتاج تسليمًا موثّقًا.</h2>
+    <div class="sec-grid2">
+      <figure class="sct rv"><img src="./assets/sector-repair.jpg" alt="ورش ومحلات صيانة الجوالات" loading="lazy" /><figcaption class="nm">ورش ومحلات صيانة الجوالات</figcaption></figure>
+      <figure class="sct rv"><img src="./assets/sector-retail.jpg" alt="متاجر التجزئة" loading="lazy" /><figcaption class="nm">متاجر التجزئة</figcaption></figure>
+      <figure class="sct rv"><img src="./assets/sector-restaurant.jpg" alt="مطاعم ومقاهي" loading="lazy" /><figcaption class="nm">مطاعم ومقاهي</figcaption></figure>
+      <figure class="sct rv"><img src="./assets/sector-pharmacy.jpg" alt="صيدليات وعيادات" loading="lazy" /><figcaption class="nm">صيدليات وعيادات</figcaption></figure>
+      <figure class="sct rv"><img src="./assets/sector-warehouse.jpg" alt="مستودعات وشحن" loading="lazy" /><figcaption class="nm">مستودعات وشحن</figcaption></figure>
+      <figure class="sct rv"><img src="./assets/sector-factory.jpg" alt="مصانع وخطوط إنتاج" loading="lazy" /><figcaption class="nm">مصانع وخطوط إنتاج</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="compare">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">نفس الكاميرا، وقراءة أعمق.</h2>
+    <p class="lead rv">اسحب الخط يمينًا ويسارًا: على اليمين ما يضيفه Toor Vision من قراءة، وعلى اليسار ما تراه الكاميرا وحدها.</p>
+    <div class="cmp rv">
+      <div class="cmp-stage" id="cmpStage" role="slider" aria-label="مقارنة المشهد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" tabindex="0">
+        <img id="cmpRaw" src="./assets/pair-retail-raw.jpg" alt="المشهد كما تراه الكاميرا" />
+        <div class="cmp-top" id="cmpTop"><img id="cmpBoxes" src="./assets/pair-retail-boxes.jpg" alt="نفس المشهد مع قراءة Toor Vision" /></div>
+        <div class="cmp-bar" id="cmpBar" aria-hidden="true"></div>
+      </div>
+      <div class="cmp-tabs" id="cmpTabs">
+        <button class="on" data-pair="retail">متجر</button>
+        <button data-pair="repair">ورشة</button>
+        <button data-pair="warehouse">مستودع</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">التنبيه وحده لا يكفي. أنت تحتاج الرواية كاملة.</h2>
+    <div class="why-grid">
+      <div class="why-c rv">
+        <h3 class="mut">الأنظمة الشائعة</h3>
+        <p>تعطيك تنبيهًا لحظيًا: حركة الآن، أو شخص دخل منطقة. وبعد دقيقة ينطفئ التنبيه وتضيع معه القصة. لا تعرف من كان مسؤولًا، ولا كم بقي الغرض، ولا ماذا حدث بعد ذلك.</p>
+      </div>
+      <div class="why-c hi rv">
+        <h3>Toor Vision</h3>
+        <p>يعطيك رحلة موثّقة: لكل غرض بداية ونهاية، ومهلة واضحة، وسطر يجيب على أول سؤال في أي مراجعة: من كان مسؤولًا، وماذا حدث بالضبط.</p>
+        <p>وتقدر تصنّف كل حدث: صحيح، أو إنذار خاطئ، أو سبب مقبول. التقييم يبقى عندك دائمًا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="tiers">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">تبدأ بكاميرا واحدة، وتكبر مع محلك.</h2>
+    <p class="lead rv">ثلاث باقات تغطي الطريق كامل: من نقطة تسليم واحدة إلى فروع متعددة بلوحة مجمعة. السعر يُحدَّد بعد جلسة العرض، وقبل أي التزام.</p>
+    <div class="plans">
+      <div class="plan rv">
+        <h3>البداية</h3>
+        <p class="pr">على الطلب <small>كاميرا واحدة</small></p>
+        <ul>
+          <li><i></i>كاميرا واحدة ومنطقتان</li>
+          <li><i></i>ثلاث حالات جاهزة</li>
+          <li><i></i>تقرير أسبوعي</li>
+          <li><i></i>دعم بالبريد</li>
+        </ul>
+        <a class="btn btn-g" href="mailto:yhmalsuwailem@gmail.com?subject=Toor%20Vision%20%C2%B7%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%A3%D8%A8%D8%BA%D9%89%20%D8%A3%D8%A8%D8%AF%D8%A3%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%C2%AB%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9%C2%BB%20(%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%20%D9%88%D8%A7%D8%AD%D8%AF%D8%A9%20%D8%B9%D9%86%D8%AF%20%D9%86%D9%82%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%84%D9%8A%D9%85).%0A%0A%D8%A7%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">ابدأ بكاميرا واحدة</a>
+      </div>
+      <div class="plan hi rv">
+        <h3>المحل بالكامل</h3>
+        <p class="pr">على الطلب <small>حتى 4 كاميرات</small></p>
+        <ul>
+          <li><i></i>حتى أربع كاميرات ومناطق بلا حد</li>
+          <li><i></i>حالات بلا حد مع اختبار على مقاطعك</li>
+          <li><i></i>تقارير يومية وتصدير السجل</li>
+          <li><i></i>دعم أولوية</li>
+        </ul>
+        <a class="btn btn-p" href="mailto:yhmalsuwailem@gmail.com?subject=Toor%20Vision%20%C2%B7%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%20%D8%A8%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A8%D8%A7%D9%82%D8%A9%20%C2%AB%D8%A7%D9%84%D9%85%D8%AD%D9%84%20%D8%A8%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%84%C2%BB.%0A%0A%D8%A7%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">غطِّ محلك بالكامل</a>
+      </div>
+      <div class="plan rv">
+        <h3>الفروع</h3>
+        <p class="pr">على الطلب <small>حتى 12 كاميرا</small></p>
+        <ul>
+          <li><i></i>فروع بلا حد</li>
+          <li><i></i>حتى اثنتي عشرة كاميرا ومناطق بلا حد</li>
+          <li><i></i>لوحة مقارنة بين الفروع</li>
+          <li><i></i>تكامل ومراجعة شهرية معك</li>
+        </ul>
+        <a class="btn btn-g" href="mailto:yhmalsuwailem@gmail.com?subject=Toor%20Vision%20%C2%B7%20%D9%81%D8%B1%D9%88%D8%B9%20%D9%85%D8%AA%D8%B9%D8%AF%D8%AF%D8%A9&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%B9%D9%86%D8%AF%D9%8A%20%D8%A3%D9%83%D8%AB%D8%B1%20%D9%85%D9%86%20%D9%81%D8%B1%D8%B9%20%D9%88%D8%A3%D8%A8%D8%BA%D9%89%20%D8%A3%D8%B9%D8%B1%D9%81%20%D8%B9%D9%86%20%D8%A8%D8%A7%D9%82%D8%A9%20%C2%AB%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%B9%C2%BB.%0A%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%B9%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%86%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">راسلنا عن فروعك</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="kline rv" aria-hidden="true"></div>
+    <h2 class="statement rv">الأسئلة التي تُسأل قبل التوقيع.</h2>
+    <div class="faq rv">
+      <details open><summary>هل يحتاج إنترنت قوي؟</summary><div class="a">لا. الشغل يصير داخل شبكتك. وإذا انقطعت الكاميرا، يتوقف الوقت ولا يُحسب فراغًا.</div></details>
+      <details><summary>هل يخزّن الوجوه أو يتعرّف على الأشخاص؟</summary><div class="a">لا. الأدوار تُستنتج من موقع الشخص داخل المناطق التي ترسمها أنت، ولا يوجد أي تعرّف على الوجوه أو الجنس أو العمر.</div></details>
+      <details><summary>هل يشتغل مع كاميراتي الحالية؟</summary><div class="a">نعم. ما نطلب منك تشتري كاميرات، والاتصال يصير داخل شبكتك.</div></details>
+      <details><summary>كم كاميرا أحتاج لأبدأ؟</summary><div class="a">واحدة عند نقطة التسليم تكفي للبداية. والأفضل: كاميرا على الكاشير أو الاستقبال، وثانية على محطة الصيانة.</div></details>
+      <details><summary>كيف أتأكد أن النتائج صحيحة؟</summary><div class="a">كل حدث يجي بدرجته ومقطعه، وتقدر تصنّفه: صحيح، أو إنذار خاطئ، أو سبب مقبول. والتقييم يبقى عندك.</div></details>
+      <details><summary>متى يبدأ التشغيل فعليًا؟</summary><div class="a">يوم عمل واحد في الغالب: نربط، ونرسم المناطق، ونختبر على مقاطعك. بعدها تشغّله على تنبيه أو تسجيل حسب اختيارك.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="book">
+  <div class="wrap book-in">
+    <h2 class="rv">جرّبها على كاميراتك.<br />والقرار بعدها لك.</h2>
+    <p class="rv">جلسة واحدة على محلّك، نشوف فيها مشهدًا حقيقيًا من كاميراتك، ونرسم المناطق أمامك، ونطلع بأول سجل لغرض واحد. عشرون دقيقة تكفي لتعرف إن كانت الفكرة تستحق.</p>
+    <a class="btn btn-p rv" href="mailto:yhmalsuwailem@gmail.com?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20Toor%20Vision&body=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AD%D8%AC%D8%B2%20%D8%B9%D8%B1%D8%B6%20%D9%84%D9%80%20Toor%20Vision%20%D8%B9%D9%84%D9%89%20%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%20%D9%85%D8%AD%D9%84%D9%8A.%0A%0A%D8%A7%D8%B3%D9%85%20%D8%A7%D9%84%D9%85%D8%AD%D9%84%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7%D8%AA%3A%0A%D9%86%D9%82%D8%B7%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%84%D9%8A%D9%85%20(%D8%A7%D8%B3%D8%AA%D9%82%D8%A8%D8%A7%D9%84%20%2F%20%D9%83%D8%A7%D8%B4%D9%8A%D8%B1%20%2F%20%D9%85%D8%AD%D8%B7%D8%A9%20%D8%B5%D9%8A%D8%A7%D9%86%D8%A9)%3A%0A%0A%D9%88%D8%B4%D9%83%D8%B1%D9%8B%D8%A7.">احجز عرضًا على محلّك</a>
+    <div class="book-notes rv">
+      <span><i></i>عشرون دقيقة على كاميراتك</span>
+      <span><i></i>عرض مكتوب بكل بند قبل أي التزام</span>
+      <span><i></i>تشغيل تجريبي حتى ثلاثين يومًا</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap ft-in">
+    <img src="./assets/logo/logo-toor-primary.svg" alt="Toor Vision" style="height:46px;width:auto" />
+    <span class="fw">TOOR VISION</span>
+    <span class="fr">كل غرض يدخل محلّك، له رحلة موثّقة · جميع الحقوق محفوظة 2026</span>
+  </div>
+</footer>
+<div class="dz" id="dz" role="dialog" aria-label="تجربة رسم المناطق" aria-modal="true">
+  <div class="dz-veil" data-dz-close></div>
+  <div class="dz-panel">
+    <div class="dz-head">
+      <span class="dot live"></span>
+      <b>تجربة رسم المناطق</b>
+            <span class="sp"></span>
+      <button class="dz-x" data-dz-close aria-label="إغلاق">✕</button>
+    </div>
+    <div class="dz-body">
+      <div class="dz-stage" id="dzStage">
+        <img id="dzImg" src="./assets/pair-retail-raw.jpg" alt="مشهد من المساحة التجريبية" />
+        <svg id="dzSvg" viewBox="0 0 1000 563" preserveAspectRatio="none" aria-label="طبقة الرسم"></svg>
+      </div>
+      <div class="dz-side">
+        <div>
+          <div class="dz-scenes" id="dzScenes"></div>
+        </div>
+        <div>
+          <div class="dz-mode">
+            <button data-mode="cust" class="on"><i class="cust"></i>منطقة العملاء</button>
+            <button data-mode="staff"><i class="staff"></i>منطقة الموظفين</button>
+          </div>
+        </div>
+        <div class="dz-acts">
+          <button class="btn bp" id="dzNew">ارسم منطقة جديدة</button>
+          <button class="btn bg2" id="dzClose2">إنهاء المنطقة</button>
+          <button class="btn bg2" id="dzClear">امسح الكل</button>
+        </div>
+        <p class="dz-hint" id="dzHint">المنطقتان جاهزتان على هذا المشهد. اضغط <b style="color:#fff">«ارسم منطقة جديدة»</b> ثم انقر على الصورة لوضع الرؤوس (ثلاث نقاط تكفي)، واسحب أي نقطة لتشكيلها. النتيجة تتحدّث لحظيًا.</p>
+        <div class="dz-verdict" id="dzVerdict"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="dz-launch" id="dzLaunch"><i></i>تجربة النموذج</button>
+
+<script>
+/* Toor Vision · motion + interactions */
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* reveal */
+  var rv = [].slice.call(document.querySelectorAll(".rv"));
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var sibs = [].slice.call(el.parentNode.children).filter(function (c) { return c.classList.contains("rv"); });
+        var i = Math.max(0, sibs.indexOf(el));
+        setTimeout(function () { el.classList.add("on"); }, Math.min(i, 6) * 90);
+        io.unobserve(el);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
+    rv.forEach(function (el) { io.observe(el); });
+
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle("on", e.isIntersecting); });
+    }, { threshold: 0.18 });
+    [].forEach.call(document.querySelectorAll(".jr"), function (el) { io2.observe(el); });
+  } else {
+    rv.forEach(function (el) { el.classList.add("on"); });
+    [].forEach.call(document.querySelectorAll(".jr"), function (el) { el.classList.add("on"); });
+  }
+
+  /* nav + progress + hero parallax */
+  var top = document.getElementById("top");
+  var prog = document.getElementById("prog");
+  var art = document.getElementById("heroArt");
+  function onScroll() {
+    var y = window.scrollY || 0;
+    if (top) top.classList.toggle("on", y > 40);
+    if (prog) {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + "%";
+    }
+    if (art && !reduce) art.style.transform = "translate3d(0," + Math.min(y * 0.22, 260) + "px,0)";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* journey videos: play while visible */
+  [].forEach.call(document.querySelectorAll(".jr video"), function (v) {
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { v.play().catch(function () {}); } else { try { v.pause(); } catch (_) {} } });
+      }, { threshold: 0.35 }).observe(v);
+    }
+  });
+
+  /* output slideshow */
+  var stage = document.getElementById("shotStage");
+  if (stage) {
+    var shots = [].slice.call(stage.querySelectorAll("img"));
+    var caps = [
+      "كل كاميرات محلك في شاشة واحدة: حالة كل منطقة، وعدد المنتظرين الآن، والأحداث التي تحتاج قرارًا.",
+      "ارسم منطقة العملاء ومنطقة الموظفين على لقطة حقيقية من الكاميرا، والتداخل يصبح مساحة مشتركة.",
+      "ابنِ الحالة كما تحتاجها: شروط، ومدة اتصال، واستثناءات دوام، وتنبيه أو تسجيل فقط.",
+      "قبل التشغيل على محلك، اختبر الحالة على مقاطع حقيقية وشاهد المرحلة والعدّاد لحظة بلحظة.",
+      "لماذا أُطلق هذا التنبيه؟ سجل يشرح كل انتقال: انتظار، وتأكيد، وتصفير، وخروج عن الدوام.",
+      "كل حدث بدرجته ومقطعه وتوقيته، مع بند مراجعة: صحيح، أو إنذار خاطئ، أو سبب مقبول.",
+      "دقائق مغطاة وخالية لكل كاميرا، ومتوسط زمن الإنجاز، وعدد الزيارات، وتصدير بملف مستقل."
+    ];
+    var dotsBox = document.getElementById("shotDots");
+    var capEl = document.getElementById("shotCap");
+    var idx = 0, timer = null, paused = false;
+
+    shots.forEach(function (_, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", "شاشة " + (i + 1));
+      if (i === 0) b.className = "on";
+      b.addEventListener("click", function () { go(i, true); });
+      dotsBox.appendChild(b);
+    });
+    var dots = [].slice.call(dotsBox.children);
+
+    function go(i, user) {
+      idx = (i + shots.length) % shots.length;
+      shots.forEach(function (s, k) { s.classList.toggle("on", k === idx); });
+      dots.forEach(function (d, k) { d.classList.toggle("on", k === idx); });
+      if (capEl) { capEl.style.opacity = 0; setTimeout(function () { capEl.textContent = caps[idx]; capEl.style.opacity = 1; }, 180); }
+      if (user) restart();
+    }
+    function restart() { if (timer) clearInterval(timer); timer = setInterval(function () { if (!paused) go(idx + 1); }, 6500); }
+    restart();
+    var wrapEl = stage.closest(".wrap");
+    if (wrapEl) {
+      wrapEl.addEventListener("mouseenter", function () { paused = true; });
+      wrapEl.addEventListener("mouseleave", function () { paused = false; });
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { paused = !es[0].isIntersecting; }, { threshold: 0.2 }).observe(stage);
+    }
+    go(0);
+  }
+
+  /* compare slider (pointer driven, right side = Toor Vision reading) */
+  var cs = document.getElementById("cmpStage");
+  if (cs) {
+    var topLayer = document.getElementById("cmpTop");
+    var bar = document.getElementById("cmpBar");
+    function setP(p) {
+      p = Math.max(2, Math.min(98, p));
+      if (topLayer) topLayer.style.clipPath = "inset(0 0 0 " + p + "%)";
+      if (bar) bar.style.left = p + "%";
+    }
+    setP(55);
+    var dragging = false;
+    function fromEvent(e) {
+      var r = cs.getBoundingClientRect();
+      setP(((e.clientX - r.left) / r.width) * 100);
+    }
+    cs.addEventListener("pointerdown", function (e) { dragging = true; cs.setPointerCapture(e.pointerId); fromEvent(e); });
+    cs.addEventListener("pointermove", function (e) { if (dragging) fromEvent(e); });
+    ["pointerup", "pointercancel"].forEach(function (ev) {
+      cs.addEventListener(ev, function () { dragging = false; });
+    });
+
+    var tabs = document.getElementById("cmpTabs");
+    if (tabs) {
+      tabs.addEventListener("click", function (e) {
+        var b = e.target.closest("button[data-pair]");
+        if (!b) return;
+        [].forEach.call(tabs.children, function (x) { x.classList.toggle("on", x === b); });
+        var k = b.getAttribute("data-pair");
+        document.getElementById("cmpRaw").src = "./assets/pair-" + k + "-raw.jpg";
+        document.getElementById("cmpBoxes").src = "./assets/pair-" + k + "-boxes.jpg";
+      });
+    }
+  }
+
+  /* open the zone demo */
+  var launch = document.getElementById("dzLaunch");
+  [].forEach.call(document.querySelectorAll("[data-open-demo]"), function (b) {
+    b.addEventListener("click", function () { if (launch) launch.click(); });
+  });
+})();
+</script>
+<script>window.DZ_DATA={"repair":[[0.193,0.305,0.532,0.978,0.9]],"retail":[[0.725,0.002,1,0.992,0.9],[0.743,0.199,0.84,0.566,0.76]],"restaurant":[[0,0.003,0.558,0.99,0.97]],"pharmacy":[[0.065,0,0.432,0.997,0.94],[0.28,0.029,0.594,0.949,0.93]],"warehouse":[[0,0.069,0.233,0.993,0.96],[0.678,0.094,0.896,0.993,0.95],[0.299,0.115,0.494,0.994,0.95],[0.445,0.226,0.674,0.994,0.93]],"factory":[[0.321,0.168,0.582,0.869,0.93],[0.55,0.449,0.673,0.832,0.55]]};</script>
+<script>
+(function(){
+  var VBW = 1000, VBH = 563;
+  var SCENES = {
+    retail: { name: "متجر", img: "./assets/pair-retail-raw.jpg", cust: [[620,60],[985,50],[990,562],[612,563]], staff: [[20,80],[500,60],[510,562],[15,563]] },
+    warehouse: { name: "مستودع", img: "./assets/pair-warehouse-raw.jpg", cust: [[10,90],[230,70],[240,562],[5,563]], staff: [[280,70],[960,60],[970,562],[270,563]] },
+    repair: { name: "ورشة صيانة", img: "./assets/pair-repair-raw.jpg", cust: [[560,80],[985,70],[990,562],[550,563]], staff: [[20,90],[540,80],[545,562],[15,563]] },
+    pharmacy: { name: "صيدلية", img: "./assets/pair-pharmacy-raw.jpg", cust: [[30,70],[500,50],[510,562],[20,563]], staff: [[560,80],[980,70],[985,562],[550,563]] },
+    restaurant: { name: "مطعم", img: "./assets/pair-restaurant-raw.jpg", cust: [[15,60],[560,50],[570,562],[10,563]], staff: [[620,80],[985,70],[990,562],[610,563]] }
+  };
+  var el = {
+    root: document.getElementById("dz"),
+    launch: document.getElementById("dzLaunch"),
+    img: document.getElementById("dzImg"),
+    svg: document.getElementById("dzSvg"),
+    scenes: document.getElementById("dzScenes"),
+    verdict: document.getElementById("dzVerdict"),
+    stage: document.getElementById("dzStage")
+  };
+  if (!el.root || !el.launch) return;
+
+  var state = {
+    scene: "retail",
+    mode: "cust",
+    zones: { cust: { pts: [], closed: false }, staff: { pts: [], closed: false } },
+    drag: null
+  };
+
+  function ns(tag, attrs){
+    var n = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function ptsAttr(pts){ return pts.map(function(p){ return p[0] + "," + p[1]; }).join(" "); }
+  function toVB(evt){
+    var r = el.svg.getBoundingClientRect();
+    return [ (evt.clientX - r.left) / r.width * VBW, (evt.clientY - r.top) / r.height * VBH ];
+  }
+  function inPoly(x, y, pts){
+    if (!pts || pts.length < 3) return false;
+    var inside = false;
+    for (var i = 0, j = pts.length - 1; i < pts.length; j = i++){
+      var xi = pts[i][0], yi = pts[i][1], xj = pts[j][0], yj = pts[j][1];
+      if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inside = !inside;
+    }
+    return inside;
+  }
+
+  function currentBoxes(){
+    var raw = (window.DZ_DATA && window.DZ_DATA[state.scene]) || [];
+    return raw.map(function(b){
+      var x = b[0] * VBW, y = b[1] * VBH, x2 = b[2] * VBW, y2 = b[3] * VBH;
+      return { x: x, y: y, w: x2 - x, h: y2 - y, s: b[4], fx: (x + x2) / 2, fy: Math.min(VBH - 1, y2) };
+    });
+  }
+
+  function render(){
+    el.svg.innerHTML = "";
+    // zones
+    ["cust", "staff"].forEach(function(key){
+      var z = state.zones[key], col = key === "cust" ? "#5fb8ff" : "#f5b544";
+      if (z.pts.length){
+        if (z.pts.length >= 3){
+          el.svg.appendChild(ns("polygon", { points: ptsAttr(z.pts), fill: col + "22", stroke: col, "stroke-width": 2, "stroke-dasharray": z.closed ? "0" : "8 6" }));
+        } else {
+          el.svg.appendChild(ns("polyline", { points: ptsAttr(z.pts), fill: "none", stroke: col, "stroke-width": 2, "stroke-dasharray": "8 6" }));
+        }
+        z.pts.forEach(function(p, i){
+          var hit = ns("circle", { cx: p[0], cy: p[1], r: 30, fill: "transparent", "data-zone": key, "data-i": i });
+          hit.style.cursor = "grab";
+          hit.style.pointerEvents = "all";
+          el.svg.appendChild(hit);
+          var c = ns("circle", { cx: p[0], cy: p[1], r: 11, fill: "#000", stroke: col, "stroke-width": 3 });
+          c.style.pointerEvents = "none";
+          el.svg.appendChild(c);
+        });
+      }
+    });
+    // persons + decisions
+    var boxes = currentBoxes(), cust = 0, staff = 0, out = 0;
+    boxes.forEach(function(b){
+      var cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+      var inC = function(pts){ return inPoly(b.fx, b.fy, pts) || inPoly(cx, cy, pts); };
+      var cPts = state.zones.cust.pts.length >= 3 ? state.zones.cust.pts : [];
+      var sPts = state.zones.staff.pts.length >= 3 ? state.zones.staff.pts : [];
+      var c = inC(cPts), s = inC(sPts);
+      var label, color;
+      if (c && s){ label = "غير محدد"; color = "#9db1c3"; }
+      else if (c){ label = "عميل"; color = "#5fb8ff"; cust++; }
+      else if (s){ label = "موظف"; color = "#f5b544"; staff++; }
+      else { label = "خارج المناطق"; color = "#7a8fa2"; out++; }
+      el.svg.appendChild(ns("rect", { x: b.x, y: b.y, width: b.w, height: b.h, fill: "none", stroke: color, "stroke-width": 3, rx: 6 }));
+      var t = ns("text", { x: b.x + 8, y: Math.max(26, Math.min(VBH - 6, b.y - 10)), fill: color, "font-size": 22, "font-family": "Segoe UI, sans-serif", "font-weight": 600 });
+      t.textContent = label + " · " + b.s.toFixed(2);
+      el.svg.appendChild(t);
+    });
+    // verdict
+    var warn = cust > 0 && staff === 0;
+    el.verdict.innerHTML =
+      '<div class="row"><span class="num">' + cust + '</span><b>داخل منطقة العملاء</b></div>' +
+      '<div class="row"><span class="num">' + staff + '</span><b>داخل منطقة الموظفين</b></div>' +
+      '<div class="row"><span class="num">' + out + '</span><b>خارج المناطق</b></div>' +
+      '<span class="st ' + (warn ? "warn" : "ok") + '"><span class="dot" style="background:' + (warn ? '#f5b544' : '#4cd6a4') + '"></span>' +
+      (warn ? "عميل ينتظر دون تغطية" : (cust > 0 ? "المنطقة مغطاة" : (boxes.length ? "ما فيه أحد داخل منطقة العملاء، جرّب توسيعها" : "ما فيه أشخاص مرصودون"))) + '</span>';
+  }
+
+  var hintEl = document.getElementById("dzHint");
+  function hint(txt){ if (hintEl) hintEl.innerHTML = txt; }
+  function setScene(key){
+    state.scene = key;
+    var sc = SCENES[key];
+    el.img.src = sc.img;
+    state.zones.cust = { pts: sc.cust.map(function(p){ return p.slice(); }), closed: true };
+    state.zones.staff = { pts: sc.staff.map(function(p){ return p.slice(); }), closed: true };
+    [].forEach.call(document.querySelectorAll("#dzScenes button"), function(b){ b.classList.toggle("on", b.getAttribute("data-scene") === key); });
+    render();
+  }
+
+  // scene chips
+  Object.keys(SCENES).forEach(function(key){
+    var b = document.createElement("button");
+    b.textContent = SCENES[key].name;
+    b.setAttribute("data-scene", key);
+    b.addEventListener("click", function(){ setScene(key); });
+    el.scenes.appendChild(b);
+  });
+
+  // mode buttons
+  [].forEach.call(document.querySelectorAll(".dz-mode button"), function(b){
+    b.addEventListener("click", function(){
+      state.mode = b.getAttribute("data-mode");
+      [].forEach.call(document.querySelectorAll(".dz-mode button"), function(x){ x.classList.toggle("on", x === b); });
+    });
+  });
+
+  // draw / drag
+  el.svg.addEventListener("pointerdown", function(e){
+    var tgt = e.target;
+    if (tgt.getAttribute && tgt.getAttribute("data-zone")){
+      state.drag = { zone: tgt.getAttribute("data-zone"), i: +tgt.getAttribute("data-i") };
+      try { el.svg.setPointerCapture(e.pointerId); } catch (err) {}
+      return;
+    }
+    var z = state.zones[state.mode];
+    if (z.closed && z.pts.length >= 3){
+      hint("منطقة " + (state.mode === "cust" ? "العملاء" : "الموظفين") + " جاهزة على المشهد. اسحب نقاطها لتعديلها، أو اضغط «ارسم منطقة جديدة» لرسمها من الصفر.");
+      return;
+    }
+    var p = toVB(e);
+    if (z.pts.length >= 3){
+      var f = z.pts[0];
+      if (Math.hypot(f[0] - p[0], f[1] - p[1]) < 45){ z.closed = true; render(); return; }
+    }
+    z.pts.push(p);
+    z.closed = false;
+    render();
+  });
+  function onMove(e){
+    if (!state.drag) return;
+    var z = state.zones[state.drag.zone];
+    if (!z || !z.pts[state.drag.i]) { state.drag = null; return; }
+    z.pts[state.drag.i] = toVB(e);
+    render();
+  }
+  el.svg.addEventListener("pointermove", onMove);
+  window.addEventListener("pointermove", onMove);
+  el.svg.addEventListener("pointerup", function(){ state.drag = null; });
+  window.addEventListener("pointerup", function(){ state.drag = null; });
+  el.svg.addEventListener("pointercancel", function(){ state.drag = null; });
+  el.svg.addEventListener("lostpointercapture", function(){ state.drag = null; });
+  el.svg.addEventListener("dblclick", function(){ var z = state.zones[state.mode]; if (z.pts.length >= 3){ z.closed = true; render(); } });
+  el.svg.addEventListener("pointercancel", function(){ state.drag = null; });
+
+  document.getElementById("dzClose2").addEventListener("click", function(){
+    var z = state.zones[state.mode];
+    if (z.pts.length >= 3) z.closed = true;
+    render();
+  });
+  document.getElementById("dzClear").addEventListener("click", function(){
+    state.zones.cust = { pts: [], closed: false };
+    state.zones.staff = { pts: [], closed: false };
+    hint("المشهد فاضي. اختر المنطقة من الأعلى، ثم انقر ثلاث نقاط على الصورة.");
+    render();
+  });
+  document.getElementById("dzNew").addEventListener("click", function(){
+    var key = state.mode;
+    state.zones[key] = { pts: [], closed: false };
+    hint("ارسم منطقة " + (key === "cust" ? "العملاء" : "الموظفين") + ": انقر نقطة، وثانية، وثالثة على الصورة. واسحب أي نقطة بعدها لتشكيلها.");
+    render();
+  });
+
+  function open(){ el.root.classList.add("on"); render(); }
+  function close(){ el.root.classList.remove("on"); }
+  el.launch.addEventListener("click", open);
+  [].forEach.call(document.querySelectorAll("[data-dz-close]"), function(x){ x.addEventListener("click", close); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+
+  setScene("retail");
+})();
+</script>
+
+</body>
+</html>
