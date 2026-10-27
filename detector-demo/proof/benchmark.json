@@ -1,0 +1,472 @@
+{
+  "dataset": "Caf\u00e9 (ECCV 2024)",
+  "source": "https://dk-kim.github.io/CAFE/",
+  "keyframes": 20,
+  "selection": "One provided human-labelled keyframe per selected clip; cameras 6 and 19. Selected for queue/counter coverage, not detection score. No fine-tuning.",
+  "evaluation": "Class person; confidence >= 0.45; one-to-one greedy matching in descending confidence; IoU >= 0.5; images resized to 960x540.",
+  "limits": "20 selected keyframes only. Not full-dataset mAP; does not evaluate tracking, staff roles, service, waiting time, intent, or fairness.",
+  "models": [
+    {
+      "model": "RF-DETR Small",
+      "weightsSha256": "d81979a9213a2109345158ce9232668df4c1ae52e9b8db3f2ec0a8cbad959b33",
+      "tp": 136,
+      "fp": 68,
+      "fn": 77,
+      "precision": 0.6666666666666666,
+      "recall": 0.6384976525821596,
+      "frames": [
+        {
+          "camera": 6,
+          "clip": 70,
+          "sourceFrame": 36,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 11,
+          "fp": 1,
+          "fn": 0,
+          "inferenceMs": 15748.89
+        },
+        {
+          "camera": 6,
+          "clip": 71,
+          "sourceFrame": 186,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 7,
+          "fp": 5,
+          "fn": 4,
+          "inferenceMs": 16.33
+        },
+        {
+          "camera": 6,
+          "clip": 72,
+          "sourceFrame": 72,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 5,
+          "fp": 6,
+          "fn": 6,
+          "inferenceMs": 16.12
+        },
+        {
+          "camera": 6,
+          "clip": 73,
+          "sourceFrame": 60,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 6,
+          "fp": 5,
+          "fn": 5,
+          "inferenceMs": 16.41
+        },
+        {
+          "camera": 6,
+          "clip": 74,
+          "sourceFrame": 90,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 6,
+          "fp": 5,
+          "fn": 5,
+          "inferenceMs": 16.26
+        },
+        {
+          "camera": 6,
+          "clip": 75,
+          "sourceFrame": 90,
+          "gt": 10,
+          "predictions": 8,
+          "tp": 4,
+          "fp": 4,
+          "fn": 6,
+          "inferenceMs": 17.27
+        },
+        {
+          "camera": 6,
+          "clip": 76,
+          "sourceFrame": 174,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 4,
+          "fp": 6,
+          "fn": 7,
+          "inferenceMs": 19.09
+        },
+        {
+          "camera": 6,
+          "clip": 77,
+          "sourceFrame": 186,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 7,
+          "fp": 5,
+          "fn": 4,
+          "inferenceMs": 17.45
+        },
+        {
+          "camera": 6,
+          "clip": 78,
+          "sourceFrame": 190,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 3,
+          "inferenceMs": 16.07
+        },
+        {
+          "camera": 6,
+          "clip": 79,
+          "sourceFrame": 198,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 7,
+          "fp": 5,
+          "fn": 4,
+          "inferenceMs": 16.55
+        },
+        {
+          "camera": 19,
+          "clip": 220,
+          "sourceFrame": 54,
+          "gt": 11,
+          "predictions": 9,
+          "tp": 7,
+          "fp": 2,
+          "fn": 4,
+          "inferenceMs": 17.26
+        },
+        {
+          "camera": 19,
+          "clip": 221,
+          "sourceFrame": 198,
+          "gt": 9,
+          "predictions": 10,
+          "tp": 7,
+          "fp": 3,
+          "fn": 2,
+          "inferenceMs": 17.72
+        },
+        {
+          "camera": 19,
+          "clip": 222,
+          "sourceFrame": 204,
+          "gt": 11,
+          "predictions": 8,
+          "tp": 6,
+          "fp": 2,
+          "fn": 5,
+          "inferenceMs": 10.84
+        },
+        {
+          "camera": 19,
+          "clip": 223,
+          "sourceFrame": 102,
+          "gt": 11,
+          "predictions": 8,
+          "tp": 7,
+          "fp": 1,
+          "fn": 4,
+          "inferenceMs": 11.42
+        },
+        {
+          "camera": 19,
+          "clip": 224,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 7,
+          "fp": 3,
+          "fn": 3,
+          "inferenceMs": 11.37
+        },
+        {
+          "camera": 19,
+          "clip": 225,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 9,
+          "tp": 7,
+          "fp": 2,
+          "fn": 3,
+          "inferenceMs": 10.85
+        },
+        {
+          "camera": 19,
+          "clip": 226,
+          "sourceFrame": 30,
+          "gt": 10,
+          "predictions": 9,
+          "tp": 7,
+          "fp": 2,
+          "fn": 3,
+          "inferenceMs": 11.09
+        },
+        {
+          "camera": 19,
+          "clip": 227,
+          "sourceFrame": 138,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 7,
+          "fp": 4,
+          "fn": 4,
+          "inferenceMs": 10.73
+        },
+        {
+          "camera": 19,
+          "clip": 228,
+          "sourceFrame": 96,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 8,
+          "fp": 3,
+          "fn": 3,
+          "inferenceMs": 12.78
+        },
+        {
+          "camera": 19,
+          "clip": 229,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 2,
+          "inferenceMs": 13.88
+        }
+      ]
+    },
+    {
+      "model": "RF-DETR Medium",
+      "weightsSha256": "749ff6071828aaffac63e204c4f4135ed3d6cdae4d702e086c360edc3b5768c8",
+      "tp": 134,
+      "fp": 71,
+      "fn": 79,
+      "precision": 0.6536585365853659,
+      "recall": 0.6291079812206573,
+      "frames": [
+        {
+          "camera": 6,
+          "clip": 70,
+          "sourceFrame": 36,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 8,
+          "fp": 4,
+          "fn": 3,
+          "inferenceMs": 45.41
+        },
+        {
+          "camera": 6,
+          "clip": 71,
+          "sourceFrame": 186,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 5,
+          "fp": 6,
+          "fn": 6,
+          "inferenceMs": 11.25
+        },
+        {
+          "camera": 6,
+          "clip": 72,
+          "sourceFrame": 72,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 6,
+          "fp": 4,
+          "fn": 5,
+          "inferenceMs": 11.83
+        },
+        {
+          "camera": 6,
+          "clip": 73,
+          "sourceFrame": 60,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 5,
+          "fp": 5,
+          "fn": 6,
+          "inferenceMs": 17.79
+        },
+        {
+          "camera": 6,
+          "clip": 74,
+          "sourceFrame": 90,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 5,
+          "fp": 5,
+          "fn": 6,
+          "inferenceMs": 11.42
+        },
+        {
+          "camera": 6,
+          "clip": 75,
+          "sourceFrame": 90,
+          "gt": 10,
+          "predictions": 8,
+          "tp": 4,
+          "fp": 4,
+          "fn": 6,
+          "inferenceMs": 11.66
+        },
+        {
+          "camera": 6,
+          "clip": 76,
+          "sourceFrame": 174,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 4,
+          "fp": 6,
+          "fn": 7,
+          "inferenceMs": 12.61
+        },
+        {
+          "camera": 6,
+          "clip": 77,
+          "sourceFrame": 186,
+          "gt": 11,
+          "predictions": 12,
+          "tp": 8,
+          "fp": 4,
+          "fn": 3,
+          "inferenceMs": 12.5
+        },
+        {
+          "camera": 6,
+          "clip": 78,
+          "sourceFrame": 190,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 8,
+          "fp": 3,
+          "fn": 3,
+          "inferenceMs": 11.44
+        },
+        {
+          "camera": 6,
+          "clip": 79,
+          "sourceFrame": 198,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 6,
+          "fp": 5,
+          "fn": 5,
+          "inferenceMs": 11.32
+        },
+        {
+          "camera": 19,
+          "clip": 220,
+          "sourceFrame": 54,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 7,
+          "fp": 3,
+          "fn": 4,
+          "inferenceMs": 11.81
+        },
+        {
+          "camera": 19,
+          "clip": 221,
+          "sourceFrame": 198,
+          "gt": 9,
+          "predictions": 10,
+          "tp": 7,
+          "fp": 3,
+          "fn": 2,
+          "inferenceMs": 11.73
+        },
+        {
+          "camera": 19,
+          "clip": 222,
+          "sourceFrame": 204,
+          "gt": 11,
+          "predictions": 9,
+          "tp": 6,
+          "fp": 3,
+          "fn": 5,
+          "inferenceMs": 11.34
+        },
+        {
+          "camera": 19,
+          "clip": 223,
+          "sourceFrame": 102,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 3,
+          "inferenceMs": 11.63
+        },
+        {
+          "camera": 19,
+          "clip": 224,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 7,
+          "fp": 3,
+          "fn": 3,
+          "inferenceMs": 11.63
+        },
+        {
+          "camera": 19,
+          "clip": 225,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 2,
+          "inferenceMs": 11.53
+        },
+        {
+          "camera": 19,
+          "clip": 226,
+          "sourceFrame": 30,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 2,
+          "inferenceMs": 11.36
+        },
+        {
+          "camera": 19,
+          "clip": 227,
+          "sourceFrame": 138,
+          "gt": 11,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 3,
+          "inferenceMs": 11.36
+        },
+        {
+          "camera": 19,
+          "clip": 228,
+          "sourceFrame": 96,
+          "gt": 11,
+          "predictions": 11,
+          "tp": 8,
+          "fp": 3,
+          "fn": 3,
+          "inferenceMs": 12.27
+        },
+        {
+          "camera": 19,
+          "clip": 229,
+          "sourceFrame": 204,
+          "gt": 10,
+          "predictions": 10,
+          "tp": 8,
+          "fp": 2,
+          "fn": 2,
+          "inferenceMs": 11.8
+        }
+      ]
+    }
+  ]
+}
